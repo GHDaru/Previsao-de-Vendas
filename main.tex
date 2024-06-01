@@ -1,0 +1,42 @@
+\documentclass[12pt, a4paper]{book}
+
+% Pacotes necessários
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configurações do hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% Título e autor do livro
+\title{Análise de Séries Temporais com Python}
+\author{Nome do Autor}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% Inclusão dos capítulos
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+% Adicione mais capítulos conforme necessário
+
+% Bibliografia
+\bibliographystyle{apalike}
+\bibliography{bibliography}
+
+\end{document}

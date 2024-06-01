@@ -1,0 +1,142 @@
+\chapter{Introdução às Séries Temporais e ao Ambiente Python}
+
+\section{Conceitos Básicos de Séries Temporais}
+
+\subsection{Definição de Série Temporal}
+Uma série temporal é uma sequência de dados coletados em intervalos de tempo regulares. Exemplos incluem o preço de ações, dados de temperatura, vendas mensais de uma loja, entre outros. Os dados de séries temporais são caracterizados por observações cronologicamente ordenadas.
+
+\subsection{Componentes de uma Série Temporal}
+\begin{itemize}
+    \item \textbf{Tendência (Trend):} O movimento de longo prazo na série temporal. Por exemplo, um aumento constante nas vendas ao longo dos anos.
+    \item \textbf{Sazonalidade (Seasonality):} Padrões que se repetem em intervalos regulares, como picos de vendas durante as férias de fim de ano.
+    \item \textbf{Ciclos (Cycles):} Flutuações que ocorrem em períodos mais longos que uma temporada, geralmente associados a fatores econômicos.
+    \item \textbf{Ruído (Noise):} Variabilidade aleatória nos dados que não pode ser explicada por tendência, sazonalidade ou ciclos.
+\end{itemize}
+
+\section{Importância e Aplicações das Séries Temporais}
+
+\subsection{Aplicações em Diversos Setores}
+\begin{itemize}
+    \item \textbf{Previsão de Vendas no Varejo:} Empresas usam séries temporais para prever vendas futuras e planejar estoques.
+    \item \textbf{Análise de Mercados Financeiros:} Investidores analisam séries temporais de preços de ações para tomar decisões de compra e venda.
+    \item \textbf{Monitoramento de Desempenho Industrial:} Dados de produção e eficiência são monitorados ao longo do tempo para identificar melhorias.
+    \item \textbf{Previsão do Clima e Meteorologia:} Meteorologistas utilizam séries temporais de dados climáticos para prever o tempo.
+    \item \textbf{Aplicações em Saúde:} Monitoramento de sinais vitais como a frequência cardíaca e pressão arterial.
+\end{itemize}
+
+\subsection{Estudos de Caso Reais}
+\begin{itemize}
+    \item \textbf{Previsão de Demanda de Energia:} Empresas de energia usam séries temporais para prever o consumo de eletricidade e otimizar a produção.
+    \item \textbf{Monitoramento de Máquinas Industriais:} Utilização de séries temporais para prever falhas em máquinas e realizar manutenção preditiva.
+\end{itemize}
+
+\section{Introdução ao Ambiente Python}
+
+\subsection{Por que Python para Séries Temporais}
+Python é uma das linguagens de programação mais populares para análise de dados devido à sua simplicidade e a vasta quantidade de bibliotecas disponíveis. Bibliotecas como Pandas, Numpy e Matplotlib tornam o processamento e a visualização de dados de séries temporais mais acessíveis.
+
+\subsection{Instalação e Configuração do Ambiente}
+Para este curso, usaremos o Anaconda, uma distribuição Python que facilita a instalação e gestão de pacotes e ambientes virtuais.
+
+\subsection{Bibliotecas Essenciais}
+\begin{itemize}
+    \item \textbf{Pandas:} Manipulação de dados e análise.
+    \item \textbf{Numpy:} Computação numérica eficiente.
+    \item \textbf{Matplotlib:} Criação de gráficos e visualizações.
+    \item \textbf{Seaborn:} Visualização estatística baseada em Matplotlib.
+    \item \textbf{Statsmodels:} Modelagem estatística e econométrica.
+    \item \textbf{Scikit-learn:} Ferramentas de aprendizado de máquina.
+\end{itemize}
+
+\section{Hands-On: Configuração do Ambiente de Trabalho}
+
+\subsection{Instalação do Anaconda e Jupyter Notebook}
+\begin{enumerate}
+    \item \textbf{Baixe o Anaconda:}
+    Acesse \href{https://www.anaconda.com/products/individual}{anaconda.com} e baixe a versão apropriada para o seu sistema operacional.
+    \item \textbf{Instale o Anaconda:}
+    Siga as instruções de instalação para o seu sistema operacional.
+    \item \textbf{Abra o Anaconda Navigator:}
+    Após a instalação, abra o Anaconda Navigator.
+    \item \textbf{Crie um novo ambiente:}
+    No Navigator, vá para a aba "Environments" e clique em "Create". Nomeie o ambiente e selecione a versão do Python.
+    \item \textbf{Instale Bibliotecas Necessárias:}
+    No ambiente criado, instale as bibliotecas essenciais usando o comando \texttt{conda install} ou \texttt{pip install}.
+\end{enumerate}
+
+\subsection{Primeiro Notebook em Python}
+\begin{enumerate}
+    \item \textbf{Abra o Jupyter Notebook:}
+    No Anaconda Navigator, selecione o ambiente criado e clique em "Launch" no Jupyter Notebook.
+    \item \textbf{Crie um novo notebook:}
+    No Jupyter, clique em "New" e selecione Python.
+    \item \textbf{Importação das bibliotecas:}
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+from sklearn.model_selection import train_test_split
+\end{lstlisting}
+\end{enumerate}
+
+\section{Hands-On: Carregamento e Visualização de Dados de Séries Temporais}
+
+\subsection{Carregamento de Dados}
+Vamos usar o conjunto de dados do AirPassengers disponível no site do datasets de R. Para facilitar, você pode baixar o arquivo CSV \href{https://raw.githubusercontent.com/jbrownlee/Datasets/master/airline-passengers.csv}{aqui}.
+
+\begin{lstlisting}[language=Python]
+url = 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/airline-passengers.csv'
+df = pd.read_csv(url, parse_dates=['Month'], index_col='Month')
+\end{lstlisting}
+
+\subsection{Visualização Inicial de Dados}
+\begin{lstlisting}[language=Python]
+plt.figure(figsize=(10, 6))
+plt.plot(df.index, df['Passengers'])
+plt.title('Número de Passageiros Aéreos Mensais')
+plt.xlabel('Data')
+plt.ylabel('Número de Passageiros')
+plt.show()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+decomposition = sm.tsa.seasonal_decompose(df['Passengers'], model='additive')
+decomposition.plot()
+plt.show()
+\end{lstlisting}
+
+\section{Exercícios Práticos}
+
+\subsection{Exercício 1: Instalação do Ambiente}
+\begin{enumerate}
+    \item Instale Python e Anaconda.
+    \item Configure um ambiente virtual e instale as bibliotecas necessárias.
+    \item Crie e configure um notebook Jupyter.
+\end{enumerate}
+
+\subsection{Exercício 2: Carregamento de Dados}
+\begin{enumerate}
+    \item Carregue o conjunto de dados de séries temporais do AirPassengers a partir de um arquivo CSV.
+    \item Realize manipulações básicas no dataframe (seleção de colunas, tratamento de datas).
+\end{enumerate}
+
+\subsection{Exercício 3: Visualização de Séries Temporais}
+\begin{enumerate}
+    \item Crie gráficos de linha para visualizar a série temporal.
+    \item Analise visualmente a presença de tendência e sazonalidade nos dados.
+\end{enumerate}
+
+\section{Leituras Recomendadas}
+\begin{itemize}
+    \item \textit{Python for Time Series: Data Analysis and Forecasting} por James D. Miller
+    \item \textit{Time Series Analysis with Python Cookbook} por Tarek A. Atwan
+    \item \textit{Hands-On Time Series Analysis with R and Python} por Rami Krispin
+\end{itemize}
+
+\section{Recursos Adicionais}
+\begin{itemize}
+    \item Tutoriais online sobre instalação e configuração do Anaconda e Jupyter Notebook.
+    \item Documentação oficial das bibliotecas Pandas, Numpy, Matplotlib, Seaborn, Statsmodels e Scikit-learn.
+\end{itemize}
